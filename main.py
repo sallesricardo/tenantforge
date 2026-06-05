@@ -1,5 +1,8 @@
+from config import settings
+
+
 def main():
-    print("Hello from tenantforge!")
+    print(f"Hello from tenantforge ({settings.app_name})!")
 
 
 if __name__ == "__main__":
