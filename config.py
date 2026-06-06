@@ -9,6 +9,12 @@ class DatabaseSettings(BaseModel):
     user: str = Field(default="postgres", alias="USER")
     password: str = Field(alias="PASSWORD")
 
+
+class LogSettings(BaseModel):
+    level: str = Field(default="INFO", alias="LEVEL")
+    app_name: str = Field(default="tenantforge", alias="APP_NAME")
+
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
         env_file=".env",
@@ -21,6 +27,7 @@ class Settings(BaseSettings):
     app_name: str = Field(default="Minha API", alias="APP_NAME")
     admin_email: str = Field(alias="ADMIN_EMAIL")
     database: DatabaseSettings = Field(alias="DATABASE")
+    log: LogSettings = Field(alias="LOG")
 
     @field_validator("admin_email")
     @classmethod
@@ -28,5 +35,6 @@ class Settings(BaseSettings):
         if "@" not in v:
             raise ValueError("email inválido")
         return v.lower()
+
 
 settings = Settings()
