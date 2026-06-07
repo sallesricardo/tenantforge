@@ -1,10 +1,11 @@
 import asyncio
-from config import settings
+from core.settings import settings
 from logSetup import LoggerSetup
-from database import get_db, engine
+from db.database import get_db, engine
 from sqlalchemy import text
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
+from api.v1.health import router as health_router
 
 logger = LoggerSetup(settings.app_name, settings.log.level).getInstance()
 
@@ -17,7 +18,12 @@ async def lifespan(app: FastAPI):
     print("Encerrando a aplicação... Desligando o pool de conexões.")
     await engine.dispose()
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+    lifespan=lifespan,
+    title=settings.app_name,
+)
+
+app.include_router(health_router)
 
 async def test_db():
     # get_db é um gerador assíncrono – iteramos para obter a sessão

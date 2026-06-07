@@ -1,8 +1,15 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import declarative_base
-from config import settings
+from core.settings import settings
 
-DATABASE_URL = f"{settings.database.driver}://{settings.database.user}:{settings.database.password}@{settings.database.host}:{settings.database.port}/{settings.database.name}"
+DRIVER = settings.database.driver
+USER = settings.database.user
+PASSWORD = settings.database.password
+HOST = settings.database.host
+PORT = settings.database.port
+NAME = settings.database.name
+
+DATABASE_URL = f"{DRIVER}://{USER}:{PASSWORD}@{HOST}:{PORT}/{NAME}"
 
 DEBUG = settings.database.debug
 POOL_SIZE = settings.database.pool.size
