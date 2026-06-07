@@ -14,5 +14,5 @@ COPY --from=builder /app/.venv /app/.venv
 
 ENV PATH="/app/.venv/bin:$PATH"
 
-COPY . .
+COPY app/. .
 CMD ["python", "main.py"]
