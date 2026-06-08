@@ -17,8 +17,10 @@ class DatabaseSettings(BaseModel):
     host: str = Field(default="localhost", alias="HOST")
     port: int = Field(default=5432, alias="PORT")
     name: str = Field(default="postgres", alias="NAME")
-    user: str = Field(default="postgres", alias="USER")
-    password: str = Field(alias="PASSWORD")
+    user: Optional[str] = Field(alias="USER")
+    password: Optional[str] = Field(alias="PASSWORD")
+    user_app: str = Field(alias="USERAPP")
+    password_app: str = Field(alias="PASSWORDAPP")
     pool: PoolSettings = Field(alias="POOL")
 
 

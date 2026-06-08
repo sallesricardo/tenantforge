@@ -3,8 +3,8 @@ from sqlalchemy.orm import declarative_base
 from core.settings import settings
 
 DRIVER = settings.database.driver
-USER = settings.database.user
-PASSWORD = settings.database.password
+USER = settings.database.user_app
+PASSWORD = settings.database.password_app
 HOST = settings.database.host
 PORT = settings.database.port
 NAME = settings.database.name
